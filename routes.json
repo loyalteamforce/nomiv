@@ -1,0 +1,15 @@
+{
+  "_comment": "DEMO verisi: koordinatlar yaklaşıktır, hatlar duraklar arası düz çizgidir. Gerçek güzergahlarla değiştirilecek.",
+  "stops": [
+    { "id": "ala-too", "name": "Площадь Ала-Тоо", "lat": 42.8766, "lng": 74.6036 },
+    { "id": "osh", "name": "Ошский рынок", "lat": 42.8750, "lng": 74.5740 },
+    { "id": "west", "name": "Западный автовокзал", "lat": 42.8700, "lng": 74.5290 },
+    { "id": "dordoi", "name": "Рынок Дордой", "lat": 42.9395, "lng": 74.6525 },
+    { "id": "airport", "name": "Аэропорт Манас", "lat": 43.0613, "lng": 74.4776 }
+  ],
+  "routes": [
+    { "number": "Demo 1", "name": "Ала-Тоо — Ошский рынок — Западный вокзал", "color": "#e53935", "stops": ["ala-too", "osh", "west"] },
+    { "number": "Demo 2", "name": "Ала-Тоо — Дордой", "color": "#1e88e5", "stops": ["ala-too", "dordoi"] },
+    { "number": "Demo 3", "name": "Ала-Тоо — Аэропорт", "color": "#43a047", "stops": ["ala-too", "airport"] }
+  ]
+}
