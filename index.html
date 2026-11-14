@@ -11,37 +11,45 @@
 </head>
 <body>
   <main id="view-map" class="view active">
+    <div id="map"></div>
+
+    <header id="topbar">
+      <img class="topbar-logo" src="logo.svg" alt="Nomiv">
+      <input id="search" type="search" placeholder="Куда поедем? Номер или остановка" autocomplete="off">
+      <button id="locate" type="button" aria-label="Моё местоположение">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3"/></svg>
+      </button>
+    </header>
+
     <aside id="panel">
-      <div class="brand">
-        <img class="brand-logo" src="logo.svg" alt="">
-        <div>
-          <h1>Nomiv <span class="app">app</span></h1>
-          <p class="sub">Маршрутки и автобусы Бишкека</p>
-        </div>
+      <div class="sheet-head">
+        <h2>Маршруты</h2>
+        <span class="badge">демо</span>
       </div>
-      <input id="search" type="search" placeholder="Поиск: номер или остановка">
-      <button id="locate" type="button">Моё местоположение</button>
       <ul id="routes"></ul>
       <p class="note">Данные пока демонстрационные.</p>
     </aside>
-    <div id="map"></div>
   </main>
 
   <section id="view-jobs" class="view page">
     <h2>Работа</h2>
-    <p>Скоро: вакансии для водителей и кондукторов.</p>
+    <p>Вакансии для водителей и кондукторов</p>
+    <span class="soon">Скоро</span>
   </section>
   <section id="view-saved" class="view page">
     <h2>Избранное</h2>
-    <p>Скоро: сохранённые маршруты и остановки.</p>
+    <p>Сохранённые маршруты и остановки</p>
+    <span class="soon">Скоро</span>
   </section>
   <section id="view-chats" class="view page">
     <h2>Чаты</h2>
-    <p>Скоро: сообщения и уведомления.</p>
+    <p>Сообщения и уведомления</p>
+    <span class="soon">Скоро</span>
   </section>
   <section id="view-profile" class="view page">
     <h2>Профиль</h2>
-    <p>Скоро: ваш аккаунт и настройки.</p>
+    <p>Ваш аккаунт и настройки</p>
+    <span class="soon">Скоро</span>
   </section>
 
   <nav id="bottom-nav" aria-label="Основная навигация">
