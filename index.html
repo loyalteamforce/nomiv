@@ -2,21 +2,78 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2fc7b1">
   <title>Nomiv — транспорт Бишкека на карте</title>
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <aside id="panel">
-    <h1>Nomiv</h1>
-    <p class="sub">Маршрутки и автобусы Бишкека</p>
-    <input id="search" type="search" placeholder="Поиск: номер или остановка">
-    <button id="locate" type="button">Моё местоположение</button>
-    <ul id="routes"></ul>
-    <p class="note">Данные пока демонстрационные.</p>
-  </aside>
-  <div id="map"></div>
+  <main id="view-map" class="view active">
+    <aside id="panel">
+      <div class="brand">
+        <img class="brand-logo" src="logo.svg" alt="">
+        <div>
+          <h1>Nomiv <span class="app">app</span></h1>
+          <p class="sub">Маршрутки и автобусы Бишкека</p>
+        </div>
+      </div>
+      <input id="search" type="search" placeholder="Поиск: номер или остановка">
+      <button id="locate" type="button">Моё местоположение</button>
+      <ul id="routes"></ul>
+      <p class="note">Данные пока демонстрационные.</p>
+    </aside>
+    <div id="map"></div>
+  </main>
+
+  <section id="view-jobs" class="view page">
+    <h2>Работа</h2>
+    <p>Скоро: вакансии для водителей и кондукторов.</p>
+  </section>
+  <section id="view-saved" class="view page">
+    <h2>Избранное</h2>
+    <p>Скоро: сохранённые маршруты и остановки.</p>
+  </section>
+  <section id="view-chats" class="view page">
+    <h2>Чаты</h2>
+    <p>Скоро: сообщения и уведомления.</p>
+  </section>
+  <section id="view-profile" class="view page">
+    <h2>Профиль</h2>
+    <p>Скоро: ваш аккаунт и настройки.</p>
+  </section>
+
+  <nav id="bottom-nav" aria-label="Основная навигация">
+    <div class="nav-inner">
+      <span id="lamp" aria-hidden="true"></span>
+
+      <button class="tab" type="button" data-view="jobs">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        <span>Работа</span>
+      </button>
+
+      <button class="tab" type="button" data-view="saved">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+        <span>Избранное</span>
+      </button>
+
+      <button class="tab center active" type="button" data-view="map" aria-label="Карта">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/></svg>
+      </button>
+
+      <button class="tab" type="button" data-view="chats">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+        <span>Чаты</span>
+      </button>
+
+      <button class="tab" type="button" data-view="profile">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Профиль</span>
+      </button>
+    </div>
+  </nav>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script src="app.js"></script>
 </body>
