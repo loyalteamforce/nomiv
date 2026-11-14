@@ -56,7 +56,20 @@
       other: 'login'
     }
   };
-  var mode = 'login';
+  // Siteye girişte önce KAYIT ekranı açılır
+  var mode = 'register';
+
+  /* Kayıttan sonra profil ekranını açmak için küçük bir işaret */
+  var WELCOME_KEY = 'nomiv_welcome';
+  function setWelcome(on) {
+    try {
+      if (on) localStorage.setItem(WELCOME_KEY, '1');
+      else localStorage.removeItem(WELCOME_KEY);
+    } catch (e) {}
+  }
+  function hasWelcome() {
+    try { return localStorage.getItem(WELCOME_KEY) === '1'; } catch (e) { return false; }
+  }
 
   function say(text, ok) {
     msg.textContent = text || '';
@@ -70,6 +83,7 @@
     if (s.indexOf('not confirmed') > -1) return 'Подтвердите email — проверьте почту';
     if (s.indexOf('rate') > -1 || s.indexOf('too many') > -1) return 'Слишком много попыток. Попробуйте позже';
     if (s.indexOf('password') > -1 && s.indexOf('least') > -1) return 'Пароль слишком короткий';
+    if (s.indexOf('provider') > -1 && s.indexOf('enabled') > -1) return 'Вход через Google пока не включён';
     return 'Ошибка: ' + m;
   }
 
@@ -142,11 +156,19 @@
       var wasLocked = !body.classList.contains('unlocked');
       body.classList.add('unlocked');
       fillProfile(session.user);
-      if (wasLocked && window.showView) window.showView('map');
+      if (wasLocked && window.showView) {
+        // Yeni kayıt olduysa iOS tarzı profil ekranı, değilse harita
+        if (hasWelcome()) {
+          setWelcome(false);
+          window.showView('profile');
+        } else {
+          window.showView('map');
+        }
+      }
     } else {
       body.classList.remove('unlocked');
       form.reset();
-      setMode('login');
+      setMode('register');
     }
   }
 
@@ -173,16 +195,18 @@
     say('');
     loading(true);
 
+    if (mode === 'register') setWelcome(true);
+
     var req = mode === 'login'
       ? sb.auth.signInWithPassword({ email: email, password: pass })
       : sb.auth.signUp({ email: email, password: pass, options: { data: { full_name: name }, emailRedirectTo: redirectUrl } });
 
     req.then(function (res) {
       loading(false);
-      if (res.error) { say(tr(res.error.message)); return; }
+      if (res.error) { setWelcome(false); say(tr(res.error.message)); return; }
       if (mode === 'register') {
         var u = res.data && res.data.user;
-        if (u && u.identities && u.identities.length === 0) { say('Этот email уже зарегистрирован'); return; }
+        if (u && u.identities && u.identities.length === 0) { setWelcome(false); say('Этот email уже зарегистрирован'); return; }
         if (!res.data.session) {
           setMode('login');
           say('Почти готово! Мы отправили письмо — подтвердите email, затем войдите.', true);
@@ -190,6 +214,7 @@
       }
     }).catch(function () {
       loading(false);
+      setWelcome(false);
       say('Нет связи с сервером. Попробуйте ещё раз.');
     });
   });
@@ -198,9 +223,10 @@
   googleBtn.addEventListener('click', function () {
     if (!sb) { say('Сервер недоступен. Обновите страницу.'); return; }
     say('');
+    if (mode === 'register') setWelcome(true);
     sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: redirectUrl } })
-      .then(function (res) { if (res && res.error) say(tr(res.error.message)); })
-      .catch(function () { say('Не удалось начать вход через Google.'); });
+      .then(function (res) { if (res && res.error) { setWelcome(false); say(tr(res.error.message)); } })
+      .catch(function () { setWelcome(false); say('Не удалось начать вход через Google.'); });
   });
 
   /* ---------- Profile ---------- */
@@ -235,5 +261,5 @@
     gate.addEventListener('mouseleave', function () { card.style.transform = ''; });
   }
 
-  setMode('login');
+  setMode('register');
 })();
