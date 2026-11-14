@@ -71,3 +71,38 @@ document.getElementById('locate').addEventListener('click', () => {
     map.setView(ll, 15);
   });
 });
+
+/* ---------- Bottom navigation ---------- */
+const nav = document.getElementById('bottom-nav');
+const lamp = document.getElementById('lamp');
+const tabs = Array.from(nav.querySelectorAll('.tab'));
+let currentView = 'map';
+
+function moveLamp() {
+  const active = tabs.find(t => t.classList.contains('active') && !t.classList.contains('center'));
+  if (!active) {
+    lamp.style.opacity = '0';
+    return;
+  }
+  lamp.style.width = active.offsetWidth + 'px';
+  lamp.style.transform = 'translateX(' + active.offsetLeft + 'px)';
+  lamp.style.opacity = '1';
+}
+
+function showView(name) {
+  currentView = name;
+  document.querySelectorAll('.view').forEach(v => {
+    v.classList.toggle('active', v.id === 'view-' + name);
+  });
+  tabs.forEach(t => {
+    const on = t.dataset.view === name;
+    t.classList.toggle('active', on);
+    if (on) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current');
+  });
+  moveLamp();
+  if (name === 'map') setTimeout(() => map.invalidateSize(), 0);
+}
+
+tabs.forEach(t => t.addEventListener('click', () => showView(t.dataset.view)));
+window.addEventListener('resize', moveLamp);
+showView(currentView);
