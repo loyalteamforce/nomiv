@@ -1,6 +1,6 @@
 (function () {
-  var SUPABASE_URL = 'https://mbyyuovlipbpioxtkjcp.supabase.co';
-  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ieXl1b3ZsaXBicGlveHRramNwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA3MjEzMjgsImV4cCI6MjEwNjI5NzMyOH0.3AVwWygymHYldwIhhYW-wfEm2XSxx4ChSCAazirofAg';
+  var SUPABASE_URL = 'https://byyxafeimbrnkapyakkl.supabase.co';
+  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ5eXhhZmVpbWJybmthcHlha2tsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ0MDU4NjEsImV4cCI6MjEwOTk4MTg2MX0.nVblYtHRHhMYUJMhRu38y0NdkoQcVRWmth2wiPd9T_Q';
 
   var body = document.body;
   var card = document.getElementById('authCard');
