@@ -5,16 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#2fc7b1">
   <title>Nomiv — транспорт Бишкека на карте</title>
-  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="icon" href="logo.svg?v=3" type="image/svg+xml">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=3">
+  <style>
+    /* Kritik kurallar: style.css gecikse bile düzen bozulmasın */
+    .view { display: none; position: relative; height: 100%; }
+    .view.active { display: block; }
+    #map { position: absolute; inset: 0; }
+  </style>
 </head>
 <body>
   <main id="view-map" class="view active">
     <div id="map"></div>
 
     <header id="topbar">
-      <img class="topbar-logo" src="logo.svg" alt="Nomiv">
+      <img class="topbar-logo" src="logo.svg?v=3" alt="Nomiv">
       <input id="search" type="search" placeholder="Куда поедем? Номер или остановка" autocomplete="off">
       <button id="locate" type="button" aria-label="Моё местоположение">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3"/></svg>
@@ -83,6 +89,6 @@
   </nav>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-  <script src="app.js"></script>
+  <script src="app.js?v=3"></script>
 </body>
 </html>
